@@ -1,0 +1,28 @@
+
+html{
+    background-color: rgb(221, 255, 126);
+}
+
+body{
+    background-color: lightcoral;
+}
+
+.header{
+    display: block;
+    padding: 30px;
+    width: 100%;
+    background-color: indigo;
+    color: khaki;
+}
+
+.note-section{
+    background-color: indianred;
+}
+
+.input textarea{
+    box-sizing: border-box;
+}
+
+.noClock{
+    pointer-events: none;
+}

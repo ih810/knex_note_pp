@@ -1,0 +1,41 @@
+<div class="note-section row">
+  <div class="col-lg-6 p-5">
+    <h4>Welcome back, {{user}}</h4>
+    <p>Add a note</p>
+    <form id="add" class="row">
+      <div class="col col-sm-9">
+        <textarea type="text" name="note" cols="35" rows="10"></textarea>
+      </div>
+      <div class="col col-sm-3">
+        <input type="submit" value="Add" />
+      </div>
+    </form>
+  </div>
+  <div class="col col-lg-6 p-5">
+    <div id="notes" class="row">
+      {{#each notes}}
+        <div class="note col col-sm-6">
+          <form>
+            <textarea
+              class="note form-control my-3 p-0"
+              rows="4"
+              cols="1"
+              style="border:0px; resize:none; width:90%"
+              id="{{this.id}}"
+            >{{this.content}}</textarea>
+          </form>
+        </div>
+        <div class="col col-sm-6 d-flex justify-content-start">
+          <button
+            type="button"
+            class="btn-close"
+            data-id="{{this.id}}"
+            style="height: 30px;"
+          >
+            x
+          </button>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
