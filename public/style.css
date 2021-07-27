@@ -1,22 +1,22 @@
 
 html{
-    background-color: rgb(221, 255, 126);
+    background-color: rgb(102, 102, 102);
 }
 
 body{
-    background-color: lightcoral;
+    background-color: rgb(102, 102, 102);
 }
 
 .header{
     display: block;
     padding: 30px;
     width: 100%;
-    background-color: indigo;
+    background-color: rgb(102, 102, 102);
     color: khaki;
 }
 
 .note-section{
-    background-color: indianred;
+    background-color: rgb(102, 102, 102);
 }
 
 .input textarea{
