@@ -77,9 +77,10 @@ const bindListener =()=>{
   $(".btn-close").on("click", (e)=>{
     console.log('e', e)
     console.log('etarget', e.target)
+    console.log('etargetdataset', e.target.dataset)
     console.log('etarget', e.target.attributes[2].value)
     // console.log('etarget', e.target)
-    const noteId = e.target.attributes[2].value
+    const noteId = e.target.dataset.id
     console.log('wt', noteId)
     axios
     .delete(`/api/notes/${noteId}`)

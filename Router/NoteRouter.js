@@ -4,9 +4,6 @@
 
 const express = require("express");
 
-const app = express();
-app.use(express.json());
-
 //using a class to handle the instance of accessing the page
 class NoteRouter {
   constructor(noteService) {

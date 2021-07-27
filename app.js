@@ -1,7 +1,3 @@
-//inbuilt setup
-const fs = require("fs");
-const path = require("path");
-
 //express setup
 const express = require("express");
 const app = express();
