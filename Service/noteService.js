@@ -5,12 +5,12 @@ class NoteService {
   }
 
   add(note, user) {
-    return this.knex("users")
-    .where({ user_name:user })
+    return this.knex("passport_users")
+    .where({ username:user })
     .then((user)=>{
       return this.knex
       .insert({ content:note, user_id: user[0].id })
-      .into('note')
+      .into('notes')
     })
     .catch((err)=>{
       throw new Error(err)
@@ -18,23 +18,23 @@ class NoteService {
   }
 
   edit(noteId, note) {
-    return this.knex('note').where('id', noteId).update({ content:note })
+    return this.knex('notes').where('id', noteId).update({ content:note })
   }
 
   delete(noteId) {
-    return this.knex('note').where('id', noteId).del();
+    return this.knex('notes').where('id', noteId).del();
   }
 
   list(username) {
     return this.knex
-      .select("note.id", "note.content")
-      .from("note")
-      .innerJoin("users", "note.user_id", "users.id")
-      .where("users.user_name", username)
-      .orderBy("note.id", "asc")
+      .select("notes.id", "notes.content")
+      .from("notes")
+      .innerJoin("passport_users", "notes.user_id", "passport_users.id")
+      .where("passport_users.username", username)
+      .orderBy("notes.id", "asc")
       .then((notes) => {
         console.log('servicenotes', notes)
-        return notes.map((note) => ({ id: note.id, content: note.content }));
+        return notes;
       })
       .catch((err)=>{
         throw new Error(err)

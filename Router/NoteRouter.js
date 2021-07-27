@@ -23,20 +23,25 @@ class NoteRouter {
 
     return router;
   }
+  
   get(req, res){
     return this.noteService
-    .list(req.auth.user)
+    .list(req.session.passport.user.username)
     .then((data) => {
-      res.json(data)
+      console.log('svc post data', data)
+      res.json(data);
     })
     .catch((err) => res.status(500).json(err));
   }
 
   post(req, res){
+    console.log(req.session)
+    console.log(req.session.passport.user.username)
     return this.noteService
-    .add(req.body.note, req.auth.user)
-    .then(() => this.noteService.list(req.auth.user))
+    .add(req.body.note, req.session.passport.user.username)
+    .then(() => this.noteService.list(req.session.passport.user.username))
     .then((data) => {
+      console.log('svc post data', data)
       res.json(data);
     })
     .catch((err) => res.status(500).json(err));
@@ -44,16 +49,16 @@ class NoteRouter {
   
   put(req, res) {
     return this.noteService
-      .edit(req.params.id, req.body.note, req.auth.user) // The noteService fires the update command, this will update our note (and our JSON file)
-      .then(() => this.noteService.list(req.auth.user)) // Then we fire list note from the same noteService which returns the array of notes for that user.
+      .edit(req.params.id, req.body.note, req.session.passport.user.username) // The noteService fires the update command, this will update our note (and our JSON file)
+      .then(() => this.noteService.list(req.session.passport.user.username)) // Then we fire list note from the same noteService which returns the array of notes for that user.
       .then((data) => res.json(data)) // Then we respond to the request with all of our notes in the JSON format back to our clients browser.
       .catch((err) => res.status(500).json(err));
   }
 
   delete(req, res){
     return this.noteService
-      .delete(req.params.id, req.auth.user)
-      .then(() => this.noteService.list(req.auth.user))
+      .delete(req.params.id, req.session.passport.user.username)
+      .then(() => this.noteService.list(req.session.passport.user.username))
       .then((data)=>{
           res.json((data))
       })

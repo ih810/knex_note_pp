@@ -25,10 +25,13 @@ var notesTemplate = Handlebars.compile(
 {{/each}}
 `
 );
-
-axios.get("/api/notes/").then((res)=>{
-  $("#notes").html(notesTemplate({ notes: res.data }));
-  bindListener();
+$(document).ready(()=>{
+  axios.get("/api/index").then((res)=>{
+    console.log(res)
+    console.log(res.data)
+    $("#notes").html(notesTemplate({ notes: res.data }));
+    bindListener();
+  })
 })
 
 const reloadNotes = (notes)=>{
@@ -47,7 +50,7 @@ const bindListener =()=>{
 
     $("textarea[name=note]").val("");
     axios
-    .post("/api/notes/", {
+    .post("/api/index", {
       note: val,
     })
     .then((res)=>{
@@ -57,7 +60,7 @@ const bindListener =()=>{
     .catch((err)=>{
       console.log('post gone wrong')
       console.log(err);
-      window.location.reload()
+      // window.location.reload()
     });
   });
 
@@ -65,7 +68,7 @@ const bindListener =()=>{
     const noteId = e.target.id;
     
     axios
-    .put(`/api/notes/${noteId}`, {
+    .put(`/api/index/${noteId}`, {
       note: $(`#${noteId}`).val(),
     })
     .then((res)=>{
@@ -78,12 +81,10 @@ const bindListener =()=>{
     console.log('e', e)
     console.log('etarget', e.target)
     console.log('etargetdataset', e.target.dataset)
-    console.log('etarget', e.target.attributes[2].value)
-    // console.log('etarget', e.target)
     const noteId = e.target.dataset.id
     console.log('wt', noteId)
     axios
-    .delete(`/api/notes/${noteId}`)
+    .delete(`/api/index/${noteId}`)
     .then((res)=>{
       console.log('del')
       reloadNotes(res.data)
